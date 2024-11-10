@@ -6,12 +6,7 @@ import pandas as pd
 with open('model.pkl', 'rb') as model_file:
     model = pickle.load(model_file)
 
-FEATURE_COLUMNS = [
-    'feature_0', 'feature_1', 'feature_2', 'feature_3', 'feature_4',
-    'feature_5', 'feature_6', 'feature_7', 'feature_8', 'feature_9',
-    'feature_10', 'feature_11', 'feature_12', 'feature_13', 'feature_14',
-    'feature_15', 'feature_16', 'feature_17', 'feature_18', 'feature_19'
-]
+FEATURE_COLUMNS = [f'feature_{i}' for i in range(10)]
 
 def predict_single_row(file):
     """
@@ -42,20 +37,24 @@ def predict_single_row(file):
     return result_message
 
 # Create Gradio interface
-with gr.Blocks(title="מודל תחזית תביעה") as demo:
-    gr.Markdown("# מודל תחזית תביעה")
+with gr.Blocks(title="מודל תחזית תביעה", css="body {background-color: #f0f8ff; font-family: Arial, sans-serif;}") as demo:
+    gr.Markdown("# מודל תחזית תביעה", elem_id="title")
 
     gr.Markdown("""
+    <div style='text-align: center; color: #4a4a4a;'>
     העלה קובץ נתוני תביעה כדי לקבל תחזית
-    """)
+    </div>
+    """, elem_id="description")
 
     file_input = gr.File(
-        label="Upload CSV file",
-        file_types=[".csv"]
+        label="העלה קובץ CSV",
+        file_types=[".csv"],
+        elem_id="file_input"
     )
     prediction_output = gr.Textbox(
-        label="Prediction Result",
-        max_lines=3
+        label="תוצאת התחזית",
+        max_lines=3,
+        elem_id="prediction_output"
     )
 
     file_input.change(
@@ -65,4 +64,4 @@ with gr.Blocks(title="מודל תחזית תביעה") as demo:
     )
 
 if __name__ == "__main__":
-    demo.launch(server_name="0.0.0.0", server_port=8080)
+    demo.launch(server_name="0.0.0.0", server_port=8080, share=True)
