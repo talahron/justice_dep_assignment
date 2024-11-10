@@ -9,7 +9,9 @@ Part 1: Model and Training
 Data Preprocessing and Model Training: The data_preprocessing_pipeline.py script preprocesses raw data, performs feature engineering, and trains multiple classification models (Logistic Regression, Decision Tree, Random Forest, XGBoost). The best-performing model is saved as model.pkl.
 
 
-
 Part 2: Gradio Application
 
 Application: The app.py script provides a Gradio-based web interface that loads the trained model for predicting lawsuit outcomes.
+
+You can access the app at this link (if you don't have the appropriate test files you won't be able to use the app):
+https://lawsuit-ml-app-404497213331.me-west1.run.app
